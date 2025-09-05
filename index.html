@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Teachers' Day</title>
+    </head>
+    <body>
+        <div id="main">
+            <h1 style="font-size: 50px;" id="title">&#128144;  Happy Teachers' Day!  &#128144;</h1><br><br>
+            <div id="image"><br><br><div id="holder"></div></div><br><br><br><br><br><br>
+            <h2 id="subtitle">Thank you!</h2>
+        </div>
+        <div onclick="openGift()" id="gift"><br><br>
+            <p style=" width: 70%; background-color: white; font-size: 10px; border: solid 1px; border-radius: 10px;">For the best teacher....</p>
+        </div>
+    </body>
+    <style>
+        body {
+            text-align: center;
+            justify-items: center;
+            background-color: lightgoldenrodyellow;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s;
+        }
+        #main {
+            transition: opacity 0.5s;
+            opacity: 0;
+            display: none;
+            text-align: center;
+            justify-items: center;
+            margin-top: 100px;
+        }
+        #subtitle {
+            transition-timing-function: linear;
+            font-size: 40px;
+            transition: opacity 0.5s;
+            opacity: 0;
+        }
+        #gift {
+            justify-items: center;
+            margin-top: 200px;
+            transition: transform 0.5s, opacity 0.5s;
+            transition-timing-function: linear;
+            background-image: url("gift.png");
+            width: 100px;
+            height: 100px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        #image {
+            justify-items: center;
+            background-color: white;
+            border: 5px black solid;
+            border-radius: 10px;
+            width: 220px;
+            height: 220px;
+            transition: transform 2s;
+            transition-timing-function: ease-out;
+        }
+        #holder {
+            width: 150px;
+            height: 150px;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: opacity 0.5s;
+            transform: scale(1.6);
+            opacity: 0;
+            transition-timing-function: linear;
+        }
+    </style>
+    <script>
+        images = ["lessons.png","enlightment.png","support.png","guidance.png","blessings.png","smile.png"];
+        text = ["Thank you for the amazing lessons.",
+            "Thank you for your enlightment.",
+            "Thank you for your support.",
+            "Thank you for your guidance.",
+            "Thank you for your blessings.",
+            "Thank you for making me smile."
+        ]
+        iter = 0;
+        timerGift = "";
+        function moveImage(){
+            image = "url('" + images[iter] +  "')";
+            txt = text[iter];
+            iter++;
+            if (iter > 5){
+                iter = 0;
+            }
+            document.getElementById("holder").style.backgroundImage = image;
+            document.getElementById("subtitle").innerText = txt;
+            document.getElementById("holder").style.opacity = 1;
+            document.getElementById("subtitle").style.opacity = 1;
+            document.getElementById("image").style.transform = "translateY(80px)";
+            setTimeout(()=>{
+                document.getElementById("image").style.transform = "translateY(0px)";
+            },2000);
+            setTimeout(()=>{
+                document.getElementById("subtitle").style.opacity = 0;
+                document.getElementById("holder").style.opacity = 0;
+            },3000);
+            setTimeout(moveImage,4500);
+        }
+        function moveGift(){
+            document.getElementById("gift").style.transform = "scale(4) translateY(20px)";
+            timerGift = setTimeout(()=>{
+                document.getElementById("gift").style.transform = "scale(4) translateY(0px)";
+            },500);
+            timerGift = setTimeout(moveGift,1000);
+        }
+        moveGift();
+        function openGift(){
+            clearTimeout(timerGift);
+            document.getElementById("gift").style.opacity = 0;
+            document.getElementById("gift").style.transform = "scale(5)";
+            setTimeout(()=>{document.getElementById("gift").style.display = "none";},500);
+            setTimeout(()=>{
+                document.getElementById("main").style.display = "inline-block";
+                setTimeout(()=>{
+                    document.getElementById("main").style.opacity = 1;
+                    moveImage();
+                },100);
+            },1000);
+        }
+        </script>
+</html>
